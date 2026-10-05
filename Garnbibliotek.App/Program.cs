@@ -1,4 +1,6 @@
-﻿namespace Garnbibliotek.App;
+﻿using System.ComponentModel.Design;
+
+namespace Garnbibliotek.App;
 
 class Program
 {
@@ -6,8 +8,8 @@ class Program
     {
 
     List<string> yarnList = new List<string>();
-    string menu = "";
-    
+    string? menu = "";
+
     do
     {    
         Console.WriteLine("Välkommen till Garnbiblioteket!");
@@ -20,17 +22,29 @@ class Program
         Console.WriteLine("5. Avsluta");
 
 //---------------------------------------------------------------------------------------------------
-        
+
+        menu = Console.ReadLine();
+
         switch(menu)
         {
             case "1":
 
             Console.WriteLine("Vilket garn vill du lägga till?");
             string? addYarn = Console.ReadLine();
-            Console.WriteLine($"{addYarn} tillagt");
-            Console.WriteLine("Vill du återgå till menyn? Ja => ");
+                if (!string.IsNullOrWhiteSpace(addYarn))
+                {
+                    yarnList.Add(addYarn);
+                }
 
-            break;
+            Console.WriteLine($"{addYarn} tillagt");
+            Console.WriteLine("Vill du återgå till menyn? Ja -> 0 | Avsluta -> 5");
+            string? case1_input= Console.ReadLine();
+
+                if(case1_input == "0") break;
+                else if(case1_input == "5") Environment.Exit(0);
+                else Console.WriteLine("Fel inmatning, försök igen");
+                
+        break;
         }
 
 
